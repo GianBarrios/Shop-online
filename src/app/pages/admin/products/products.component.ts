@@ -26,12 +26,25 @@ export class ProductsComponent implements OnInit{
       "productImageUrl": "" 
   };
   categoryList: any [] = [];
+  productList: any [] = [];
 
  constructor(private productSrv: ProductService){
 
  }
   ngOnInit(): void {
+    this.getProducts();
     this.getALlCategory();
+  }
+
+  getProducts(){
+    this.productSrv.getProducts().subscribe(
+      (res:any) => {
+        this.productList = res.data;
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    );
   }
 
   getALlCategory(){
@@ -44,6 +57,34 @@ export class ProductsComponent implements OnInit{
       }
     );
   }
+ onUpdate() {
+  this.productSrv.saveProduct(this.productObj).subscribe((res:any)=>{
+    debugger;
+    if(res.result) {
+      alert("Producto Creado")
+      this.getProducts();
+    } else {
+      alert(res.message)
+    }
+  })
+ }
+ onSave() {
+  this.productSrv.saveProduct(this.productObj).subscribe((res:any)=>{
+    debugger;
+    if(res.result) {
+      alert("Producto Creado")
+      this.getProducts();
+    } else {
+      alert(res.message)
+    }
+  })
+ }
+
+  onEdit(item: any ){
+    this.productObj = item;
+    this.openSidePanel();
+  }
+  
   openSidePanel (){
     this.isSidePanelVisible = true;
   } 
