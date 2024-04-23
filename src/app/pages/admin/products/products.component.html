@@ -83,11 +83,13 @@
                 <div class="row">
                     <div class="col-6">
                         <label for="">Categoria</label>
-                        <input type="text" [(ngModel)]="productObj.categoryId" class="form-control">
+                            <select [(ngModel)]="productObj.categoryId" class="form-select">
+                                <option *ngFor="let cate of categoryList" [value]="cate.categoryId"> {{cate.categoryName}} </option>
+                            </select>
                     </div>
                     <div class="col-6">
                         <label for="">Delivery Time Span</label>
-                        <input type="text" [(ngModel)]="productObj.delivery.TimeSpan "class="form-control">
+                        <input type="text" [(ngModel)]="productObj.deliveryTimeSpan "class="form-control">
                     </div>
                 </div>
                 <div class="row">
@@ -99,7 +101,7 @@
                 <div class="row">
                     <div class="col-6">
                         <label for="">Descripcion del Producto</label>
-                        <textarea rows="4" class="form-control"[(ngModel)]="productObj.productDescription"></textarea>
+                        <textarea rows="4" class="form-control" [(ngModel)]="productObj.productDescription"></textarea>
                     </div>
                 </div>
             </div>
